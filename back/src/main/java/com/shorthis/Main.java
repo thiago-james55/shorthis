@@ -1,13 +1,13 @@
-package com.shorthis.ShortHis;
+package com.shorthis;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ShortHisApplication {
+public class Main {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ShortHisApplication.class, args);
+		SpringApplication.run(Main.class, args);
 	}
 
 }
