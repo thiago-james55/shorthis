@@ -1,7 +1,7 @@
-package com.shorthis.Entities.controller;
+package com.shorthis.controller;
 
-import com.shorthis.Entities.ShortedURL;
-import com.shorthis.Entities.User;
+import com.shorthis.entities.ShortedURL;
+import com.shorthis.entities.User;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

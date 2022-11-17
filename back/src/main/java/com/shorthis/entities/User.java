@@ -1,4 +1,4 @@
-package com.shorthis.Entities;
+package com.shorthis.entities;
 
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
