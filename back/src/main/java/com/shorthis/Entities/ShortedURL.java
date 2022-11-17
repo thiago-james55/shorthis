@@ -7,7 +7,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.net.URL;
 import java.util.Objects;
 
 @AllArgsConstructor
@@ -27,7 +26,7 @@ public class ShortedURL {
     @NotNull
     @NotBlank
     @Column(unique = true)
-    private URL url;
+    private String url;
 
     @NotNull
     @ManyToOne
