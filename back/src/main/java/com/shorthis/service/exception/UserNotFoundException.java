@@ -1,8 +1,8 @@
 package com.shorthis.service.exception;
 
-public class UrlNotValidException extends RuntimeException{
+public class UserNotFoundException extends RuntimeException{
 
-    public UrlNotValidException(String message) {
+    public UserNotFoundException(String message) {
         super(message);
     }
 

@@ -1,24 +1,36 @@
 package com.shorthis.service;
 
-import com.shorthis.entities.dto.UserDTO;
-import com.shorthis.entities.mapper.UserMapper;
+import com.shorthis.entities.User;
 import com.shorthis.repository.UserRepository;
+import com.shorthis.service.exception.UserNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 
 @AllArgsConstructor
 @Service
 public class UserService {
 
     private UserRepository userRepository;
-    private UserMapper userMapper;
 
-    public List<UserDTO> findAllUsers() {
+    public List<User> findAllUsers() {
 
-        return userMapper.userListToUserDTOList(userRepository.findAll());
+        return userRepository.findAll();
 
     }
 
+    public User findUserByLoginOrElseThrow(String login) {
+
+        return userRepository.findById(login)
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
+
+    }
+
+    public List<User> findAll() {
+
+        return userRepository.findAll();
+
+    }
 }

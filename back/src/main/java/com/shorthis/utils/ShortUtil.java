@@ -1,18 +1,20 @@
 package com.shorthis.utils;
 
 import com.shorthis.repository.ShortedURLRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
+
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
+
+@AllArgsConstructor
 
 @Component
 public class ShortUtil {
 
     private char[] dictionary;
-    private int dictionaryLength;
     private ShortedURLRepository shortedURLRepository;
-
-    public ShortUtil() {
-        fillDictionary();
-    }
 
     private void fillDictionary() {
 
@@ -23,19 +25,21 @@ public class ShortUtil {
                  'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
                  '1','2','3','4','5','6','7','8','9','0','!', '#', '$' , '%', '-' , '+' , '_'};
 
-        dictionaryLength = dictionary.length;
-
     }
 
     public String generateUniqueShortKey() {
 
-        StringBuilder sb = new StringBuilder();
+        fillDictionary();
+
+        StringBuilder sb;
 
         do {
 
+            sb = new StringBuilder();
+
             for (int i = 0; i < 6; i++) {
 
-                int random = (int) (Math.random() * dictionaryLength);
+                int random = (int) (Math.random() * dictionary.length);
 
                 sb.append(dictionary[random]);
 
@@ -58,4 +62,17 @@ public class ShortUtil {
         return !shortKeyIsUnique(generatedShortKey);
 
     }
+
+    public boolean isUrlValid(String url) {
+
+        try {
+            new URL(url).toURI();
+            return true;
+        } catch (MalformedURLException | URISyntaxException e) {
+            return false;
+        }
+
+    }
+
+
 }

@@ -27,24 +27,15 @@ import java.util.Objects;
 public class User {
 
     @Id
-    @NotNull
-    @NotBlank
     @Size(max = 60)
     private String login;
 
-    @NotNull
-    @NotBlank
     @Size(max = 60)
     private String name;
 
-    @NotNull
-    @NotBlank
-    @Email
     @Size(max = 255)
     private String email;
 
-    @NotNull
-    @NotBlank
     private String hashPassword;
 
     @OneToMany(mappedBy = "user")
