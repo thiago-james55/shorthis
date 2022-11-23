@@ -4,7 +4,6 @@ import com.shorthis.entities.ShortedURL;
 import com.shorthis.entities.User;
 import com.shorthis.repository.ShortedURLRepository;
 import com.shorthis.service.exception.ShortedUrlException;
-import com.shorthis.service.exception.UrlNotValidException;
 import com.shorthis.utils.ShortUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -27,13 +26,13 @@ public class ShortedURLService {
 
     public ShortedURL shortAndSave(String url , String userLogin){
 
-        if (!shortUtil.isUrlValid(url)) throw new UrlNotValidException("Url is not valid!");
+        String validUrl = shortUtil.validateUrl(url);
 
         String shortKey = shortUtil.generateUniqueShortKey();
 
         User user = userService.findUserByLoginOrElseThrow(userLogin);
 
-        ShortedURL shortedURL = new ShortedURL(shortKey,url,user);
+        ShortedURL shortedURL = new ShortedURL(shortKey,validUrl,user);
 
         return shortedURLRepository.save(shortedURL);
 
