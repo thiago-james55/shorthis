@@ -29,11 +29,10 @@ public class ShortedURLController {
 
     }
 
-    @RequestMapping("/{shortKey}/1")
+    @RequestMapping("/{shortKey}")
     public RedirectView localRedirect(@PathVariable String shortKey) {
 
-        User user = new User("testing","John Test","john@gmail.com","Hui@813h",null);
-        ShortedURL shortedURL = new ShortedURL("first","1321.11231",user);
+        ShortedURL shortedURL = shortedURLService.findShortedUrlByShortKeyOrThrow(shortKey);
 
         RedirectView redirectView = new RedirectView();
         redirectView.setUrl(shortedURL.getUrl());
@@ -46,7 +45,7 @@ public class ShortedURLController {
     @RequestMapping("/1")
     public ResponseEntity<Void> redirect(){
 
-        return ResponseEntity.status(HttpStatus.FOUND).location(URI.create("fullstackdeveloper.guru")).build();
+        return ResponseEntity.status(HttpStatus.FOUND).location(URI.create("https://fullstackdeveloper.guru")).build();
     }
 
     @PostMapping

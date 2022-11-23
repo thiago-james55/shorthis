@@ -3,6 +3,7 @@ package com.shorthis.service;
 import com.shorthis.entities.ShortedURL;
 import com.shorthis.entities.User;
 import com.shorthis.repository.ShortedURLRepository;
+import com.shorthis.service.exception.ShortedUrlException;
 import com.shorthis.service.exception.UrlNotValidException;
 import com.shorthis.utils.ShortUtil;
 import lombok.AllArgsConstructor;
@@ -41,6 +42,13 @@ public class ShortedURLService {
     public List<ShortedURL> findAll() {
 
         return shortedURLRepository.findAll();
+
+    }
+
+    public ShortedURL findShortedUrlByShortKeyOrThrow(String shortKey) {
+
+        return shortedURLRepository.findById(shortKey)
+                .orElseThrow( () -> new ShortedUrlException("ShortKey not found"));
 
     }
 }

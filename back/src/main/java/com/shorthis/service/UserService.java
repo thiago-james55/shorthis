@@ -2,7 +2,7 @@ package com.shorthis.service;
 
 import com.shorthis.entities.User;
 import com.shorthis.repository.UserRepository;
-import com.shorthis.service.exception.UserNotFoundException;
+import com.shorthis.service.exception.UserException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +24,7 @@ public class UserService {
     public User findUserByLoginOrElseThrow(String login) {
 
         return userRepository.findById(login)
-                .orElseThrow(() -> new UserNotFoundException("User not found"));
+                .orElseThrow(() -> new UserException("User not found"));
 
     }
 
