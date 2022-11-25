@@ -27,13 +27,10 @@ import java.util.Objects;
 public class User {
 
     @Id
-    @Size(max = 60)
     private String login;
 
-    @Size(max = 60)
     private String name;
 
-    @Size(max = 255)
     private String email;
 
     private String hashPassword;

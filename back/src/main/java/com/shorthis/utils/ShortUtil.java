@@ -4,7 +4,6 @@ import com.shorthis.repository.ShortedURLRepository;
 import com.shorthis.service.exception.UrlException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
