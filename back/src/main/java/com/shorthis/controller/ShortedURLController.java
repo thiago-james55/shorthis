@@ -36,6 +36,15 @@ public class ShortedURLController {
 
     }
 
+    @GetMapping("/{shortKey}/show")
+    public ResponseEntity<String> showUrlOfShortKey(@PathVariable String shortKey) {
+
+        ShortedURL shortedURL = shortedURLService.findShortedUrlByShortKeyOrThrow(shortKey);
+
+        return ResponseEntity.ok(shortedURL.getUrl());
+
+    }
+
     @PostMapping
     public ResponseEntity<ShortedURL> shortAndSave(@RequestBody ShortedURL shortedURL) {
 
@@ -45,6 +54,7 @@ public class ShortedURLController {
         return ResponseEntity.ok(savedShortedUrl);
 
     }
+
 
 
 }

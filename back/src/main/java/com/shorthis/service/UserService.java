@@ -55,5 +55,7 @@ public class UserService {
         if (userRepository.existsByEmail(user.getEmail())) fields.add("email");
 
         if ( fields.size() > 0) throw new UserException("User with " + fields.toString() + " already exists");
+
     }
+
 }
