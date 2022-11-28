@@ -1,9 +1,8 @@
 package com.shorthis.service;
 
 import com.shorthis.entities.User;
-import com.shorthis.entities.dto.UserDTO;
-import com.shorthis.entities.input.UserInput;
 import com.shorthis.repository.UserRepository;
+import com.shorthis.security.UserSecurity;
 import com.shorthis.service.exception.UserException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +16,7 @@ import java.util.List;
 public class UserService {
 
     private UserRepository userRepository;
+    private UserSecurity userSecurity;
 
     public List<User> findAllUsers() {
 
@@ -39,14 +39,15 @@ public class UserService {
 
     public User saveUser(User user) {
 
-        existsUserWithSameLoginOrPassword(user);
+        existsUserWithSameLoginOrEmail(user);
+
+        user.setHashPassword(userSecurity.toSHA256(user.getHashPassword()));
 
         return userRepository.save(user);
 
-
     }
 
-    private void existsUserWithSameLoginOrPassword(User user) {
+    private void existsUserWithSameLoginOrEmail(User user) {
 
         List<String> fields = new ArrayList<>();
 

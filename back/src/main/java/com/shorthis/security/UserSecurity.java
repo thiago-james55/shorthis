@@ -1,9 +1,12 @@
 package com.shorthis.security;
 
+import com.google.common.hash.Hashing;
 import com.shorthis.entities.User;
 import com.shorthis.utils.HashUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
+
+import java.nio.charset.StandardCharsets;
 
 @AllArgsConstructor
 @Component
@@ -13,15 +16,14 @@ public class UserSecurity {
 
     public boolean isCorrectPassword(String login, String pass) {
 
-        //Get User from Repository
-        User user = new User(
-                "testing","John Test","john@gmail.com","Hui@813h",null
-        );
-
-        return isHashEquals(user.getHashPassword(), pass);
+        return true;
 
     }
 
-    private boolean isHashEquals(String hashPass , String pass) { return hashPass.equals(hashUtil.hashOfString(pass)); }
+    public String toSHA256(String in) {
+        return Hashing.sha256().hashString(in, StandardCharsets.UTF_8).toString();
+    }
+
+
 
 }

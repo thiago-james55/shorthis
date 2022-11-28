@@ -50,8 +50,6 @@ public class UserController {
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<UserDTO> saveUser(@Valid @RequestBody UserInput input) {
 
-
-
         User user = userService.saveUser(userMapper.userInputToUser(input));
 
         return ResponseEntity.ok(userMapper.userToUserDTO(user));
