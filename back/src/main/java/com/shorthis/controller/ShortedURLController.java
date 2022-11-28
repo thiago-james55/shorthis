@@ -1,6 +1,7 @@
 package com.shorthis.controller;
 
 import com.shorthis.entities.ShortedURL;
+import com.shorthis.entities.input.ShortedURLInput;
 import com.shorthis.service.ShortedURLService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -46,10 +47,9 @@ public class ShortedURLController {
     }
 
     @PostMapping
-    public ResponseEntity<ShortedURL> shortAndSave(@RequestBody ShortedURL shortedURL) {
+    public ResponseEntity<ShortedURL> shortAndSave(@RequestBody ShortedURLInput shortedURLInput) {
 
-        ShortedURL savedShortedUrl = shortedURLService
-                .shortAndSave(shortedURL.getUrl(), shortedURL.getUser().getLogin());
+        ShortedURL savedShortedUrl = shortedURLService.shortAndSave(shortedURLInput);
 
         return ResponseEntity.ok(savedShortedUrl);
 

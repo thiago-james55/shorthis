@@ -2,6 +2,7 @@ package com.shorthis.service;
 
 import com.shorthis.entities.ShortedURL;
 import com.shorthis.entities.User;
+import com.shorthis.entities.input.ShortedURLInput;
 import com.shorthis.repository.ShortedURLRepository;
 import com.shorthis.service.exception.ShortedUrlException;
 import com.shorthis.utils.ShortUtil;
@@ -24,13 +25,20 @@ public class ShortedURLService {
 
     }
 
-    public ShortedURL shortAndSave(String url , String userLogin){
+    public ShortedURL shortAndSave(ShortedURLInput shortedURLInput){
 
-        String validUrl = shortUtil.validateUrl(url);
+        String validUrl = shortUtil.validateUrl(shortedURLInput.getUrl());
 
         String shortKey = shortUtil.generateUniqueShortKey();
 
-        User user = userService.findUserByLoginOrElseThrow(userLogin);
+        User user;
+
+        if (shortedURLInput.getUser() != null) {
+           user = userService.findUserByLoginOrElseThrow(shortedURLInput.getUser().getLogin());
+        } else {
+            user = new User();
+            user.setLogin("Anonymous");
+        }
 
         ShortedURL shortedURL = new ShortedURL(shortKey,validUrl,user);
 
