@@ -4,11 +4,13 @@ import com.shorthis.entities.ShortedURL;
 import com.shorthis.entities.input.ShortedURLInput;
 import com.shorthis.service.ShortedURLService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 
+import javax.validation.Valid;
 import java.util.List;
 
 @AllArgsConstructor
@@ -46,8 +48,10 @@ public class ShortedURLController {
 
     }
 
+
     @PostMapping
-    public ResponseEntity<ShortedURL> shortAndSave(@RequestBody ShortedURLInput shortedURLInput) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<ShortedURL> shortAndSave(@Valid @RequestBody ShortedURLInput shortedURLInput) {
 
         ShortedURL savedShortedUrl = shortedURLService.shortAndSave(shortedURLInput);
 

@@ -5,6 +5,7 @@ import com.shorthis.entities.User;
 import com.shorthis.entities.input.ShortedURLInput;
 import com.shorthis.repository.ShortedURLRepository;
 import com.shorthis.service.exception.ShortedUrlException;
+import com.shorthis.service.exception.ShortedUrlNotFoundException;
 import com.shorthis.utils.ShortUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,7 @@ public class ShortedURLService {
     }
 
     public ShortedURL shortAndSave(ShortedURLInput shortedURLInput){
+
 
         String validUrl = shortUtil.validateUrl(shortedURLInput.getUrl());
 
@@ -55,7 +57,7 @@ public class ShortedURLService {
     public ShortedURL findShortedUrlByShortKeyOrThrow(String shortKey) {
 
         return shortedURLRepository.findById(shortKey)
-                .orElseThrow( () -> new ShortedUrlException("ShortKey not found"));
+                .orElseThrow( () -> new ShortedUrlNotFoundException("ShortKey " + shortKey + "not found"));
 
     }
 }
