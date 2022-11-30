@@ -4,9 +4,38 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/main.js" defer></script>
     <title>ShortHIS Url Shortener</title>
 </head>
 <body>
-    
+    <div class="topnav">
+        <a id="title" href="#home">ShortHIS</a>
+        <a href="#search">Search</a>
+        <a href="#myshorts">My Shorts</a>
+        <a href="#about">About</a>
+
+        <div class="login">
+            <a href="#login">Login</a>
+            <a href="#signup">Sign Up</a>
+        </div>
+
+      </div>
+
+      <div class="welcome">
+      <h1>Welcome to ShortHIS URL Shortener</h1>
+      <p>Enter the link below to short. <a href="signup.html"> Sign Up </a> or <a href="login.html">Login </a> for more features. </p>
+      </div>
+      
+      <div class="engine">
+        <input id="enterlink"type="text" name="inputshort" placeholder="Enter the link here">
+        <button id="submit" type="button" disabled>Short this</button>
+      </div>
+
+      <div id="toastyMessage">
+        ⚠ The link length must be greater than 5 ⚠
+      </div>
+
+
 </body>
 </html>
