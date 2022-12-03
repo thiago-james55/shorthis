@@ -16,6 +16,7 @@ import java.util.List;
 
 @AllArgsConstructor
 
+@CrossOrigin
 @RestController
 @RequestMapping("/shorthis/users")
 public class UserController {

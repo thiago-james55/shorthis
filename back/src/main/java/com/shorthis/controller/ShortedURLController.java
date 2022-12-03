@@ -15,6 +15,7 @@ import java.util.List;
 
 @AllArgsConstructor
 
+@CrossOrigin
 @RestController
 @RequestMapping("/shorthis")
 public class ShortedURLController {

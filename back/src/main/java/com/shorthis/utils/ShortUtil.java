@@ -83,6 +83,8 @@ public class ShortUtil {
 
     private String tryToFixUrlMissingProtocol(String url) {
 
+        System.out.println(url);
+
         StringBuilder sb;
 
         for (String protocol : protocolsAllowed) {
