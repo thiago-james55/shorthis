@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="js/main.js" defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <title>ShortHIS Url Shortener</title>
+    <title>ShortHIS - Sign Up</title>
 </head>
 <body>
     <div class="topnav">
@@ -24,13 +24,21 @@
       </div>
 
       <div class="welcome">
-      <h1>Welcome to ShortHIS URL Shortener</h1>
-      <p>Enter the link below to short. <a href="signup.html"> Sign Up </a> or <a href="login.html">Login </a> for more features. </p>
+      <h1>Sign Up</h1>
+      <p>Sign up to have access to you <a href="/myshorts.html">personal shorts</a>.</p>
+      <p>Create, save , edit yours shorts and <a href="/myshorts.html">view shorts</a> of other users. </p>
       </div>
       
       <div class="engine">
-        <input id="enterlink"type="text" name="inputshort" placeholder="Enter the link here">
-        <button id="submit" type="button" disabled>Short this</button>
+
+      
+        <input placeholder="Name" type="text" name="inputName" id="inputName">
+        <input placeholder="Login" type="text" name="inputLogin" id="inputLogin">
+        <input placeholder="Email" type="email" name="inputEmail" id="inputEmail">
+        <input placeholder="Password" type="password" name="inputPassword" id="inputPassword">
+        <input placeholder="Confirm Password" type="password" name="inputConfirmPassword" id="inputConfirmPassword">
+        <p>Password Weakness:</p>
+
       </div>
 
       <div id="toastyMessage">

@@ -57,6 +57,7 @@ a#title {
     text-align: center;
 }
 
+
 input {
     display: table-cell;
     width: 70%;
@@ -109,6 +110,8 @@ button:hover {
     visibility: hidden; 
     min-width: 100%;
     margin-left: -50%; 
+    margin-top: 0;
+    margin-bottom: 0;
     font: 17px lato,arial;
     background-color: white; 
     color: white; 
@@ -120,13 +123,15 @@ button:hover {
     left: 50%; 
     bottom: 0px; 
   }
+
+
   
 
-  #toastyMessage.show {
+#toastyMessage.show {
     visibility: visible; 
     -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
     animation: fadein 0.5s, fadeout 0.5s 2.5s;
-  }
+}
   
 
   @-webkit-keyframes fadein {
@@ -148,3 +153,4 @@ button:hover {
     from {bottom: 0px; opacity: 1;}
     to {bottom: 0; opacity: 0;}
   }
+

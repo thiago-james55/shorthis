@@ -5,9 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/main.js" defer></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <title>ShortHIS Url Shortener</title>
+    <script src="js/success.js" defer></script>
+    <title>ShortHIS Url Shortener - Short Generated</title>
 </head>
 <body>
     <div class="topnav">
@@ -18,19 +17,19 @@
 
         <div class="login">
             <a href="#login">Login</a>
-            <a href="/signup.html">Sign Up</a>
+            <a href="#signup">Sign Up</a>
         </div>
 
       </div>
 
       <div class="welcome">
-      <h1>Welcome to ShortHIS URL Shortener</h1>
-      <p>Enter the link below to short. <a href="signup.html"> Sign Up </a> or <a href="login.html">Login </a> for more features. </p>
+      <h1>Success!</h1>
+      <p>You successful generated your Short! <a href="signup.html"> Sign Up </a> or <a href="login.html">Login </a> for more features. </p>
       </div>
       
       <div class="engine">
-        <input id="enterlink"type="text" name="inputshort" placeholder="Enter the link here">
-        <button id="submit" type="button" disabled>Short this</button>
+        <input id="yourLink" type="url" name="inputshort" readonly placeholder="Your Link Here">
+        <button id="copyButton" type="button">Copy Link</button>
       </div>
 
       <div id="toastyMessage">
