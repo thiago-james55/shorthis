@@ -1,27 +1,27 @@
 var enterLinkinput = document.getElementById("enterlink");
 var submitButton = document.getElementById("submit");
 var toastyMessageDiv = document.getElementById("toastyMessage");
-var shortUrlController = "http://localhost:8080/shorthis/";
+var shortUrlController = "http://localhost:8080/shorthis/users";
 
-enterLinkinput.addEventListener("change", function () {
-  if (enterLinkinput.value.length > 5) {
-    submitButton.disabled = false;
-  } else {
-    submitButton.disabled = true;
-    showToasty("Input length must be greater than 5!");
-  }
-});
+function addListerners() {
 
-function showToasty(message) {
-  var toastyMessage = document.getElementById("toastyMessage");
-  toastyMessage.innerHTML = message;
+  enterLinkinput.addEventListener("change", function () {
+    if (enterLinkinput.value.length > 5) {
+      submitButton.disabled = false;
+    } else {
+      submitButton.disabled = true;
+      showToasty("Input length must be greater than 5!");
+    }
+  });
 
-  toastyMessage.className = "show";
+  submitButton.addEventListener("click", () => {
+    //Add logic to userLogin
+  
+    saveShort(enterLinkinput.value);
+  });
 
-  setTimeout(function () {
-    toastyMessage.className = toastyMessage.className.replace("show", "");
-  }, 3000);
 }
+
 
 async function saveShort(url, userLogin) {
   let post;
@@ -68,8 +68,31 @@ function beginWithResponse(response) {
   }
 }
 
-submitButton.addEventListener("click", () => {
-  //Add logic to userLogin
 
-  saveShort(enterLinkinput.value);
-});
+function showToasty(message) {
+  var toastyMessage = document.getElementById("toastyMessage");
+  toastyMessage.innerHTML = message;
+
+  toastyMessage.className = "show";
+
+  setTimeout(function () {
+    toastyMessage.className = toastyMessage.className.replace("show", "");
+  }, 3000);
+}
+
+function isLogedIn() {
+
+  let login = sessionStorage.getItem("login");
+
+  if (login) {
+    document.getElementById("aUserInformation").hidden = false;
+    document.getElementById("aUserInformation").innerHTML = login;
+    document.getElementById("aLogin").hidden = true;
+    document.getElementById("aSignUp").hidden = true;
+    document.getElementById("info").innerHTML = "Enter the link below to short"
+  }
+
+
+}
+
+isLogedIn();

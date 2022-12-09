@@ -18,6 +18,10 @@
     text-align: right;
 }
 
+a#aUserInformation{
+    color: red;
+}
+
 a#title {
     background-color: red;
     padding-left: 40px;
@@ -70,6 +74,7 @@ input {
     box-sizing: border-box;
 }
 
+
 button:disabled {
     background: grey;
     border: #bbb;
@@ -98,6 +103,10 @@ button {
     border-style: solid;
     cursor: pointer;
    
+}
+
+button#buttonSignUp{
+    width: 70%;
 }
 
 button:hover {

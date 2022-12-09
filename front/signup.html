@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/main.js" defer></script>
+    <script src="js/signup.js" defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <title>ShortHIS - Sign Up</title>
 </head>
@@ -17,8 +17,9 @@
         <a href="#about">About</a>
 
         <div class="login">
-            <a href="#login">Login</a>
-            <a href="/signup.html">Sign Up</a>
+            <a id="aUserInformation" hidden href="/userInformation.html">User</a>
+            <a id="aLogin" href="#login">Login</a>
+            <a id="aSignUp" href="/signup.html">Sign Up</a>
         </div>
 
       </div>
@@ -32,12 +33,13 @@
       <div class="engine">
 
       
-        <input placeholder="Name" type="text" name="inputName" id="inputName">
-        <input placeholder="Login" type="text" name="inputLogin" id="inputLogin">
-        <input placeholder="Email" type="email" name="inputEmail" id="inputEmail">
-        <input placeholder="Password" type="password" name="inputPassword" id="inputPassword">
-        <input placeholder="Confirm Password" type="password" name="inputConfirmPassword" id="inputConfirmPassword">
-        <p>Password Weakness:</p>
+        <input id="inputName" class="userData" placeholder="Name" type="text" name="inputName" id="inputName">
+        <input id="inputLogin" class="userData" placeholder="Login" type="text" name="inputLogin" id="inputLogin">
+        <input id="inputEmail" class="userData" placeholder="Email" type="email" name="inputEmail" id="inputEmail">
+        <input id="inputPassword" class="userData" placeholder="Password" type="password" name="inputPassword" id="inputPassword">
+        <input id="inputConfirmPassword" class="userData" placeholder="Confirm Password" type="password" name="inputConfirmPassword" id="inputConfirmPassword">
+        <p id="pPasswordWeakness">Password Weakness: Type a Password</p>
+        <button id="buttonSignUp">Create Account</button>
 
       </div>
 
