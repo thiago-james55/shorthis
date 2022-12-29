@@ -3,6 +3,7 @@ package com.shorthis.entities.mapper;
 import com.shorthis.entities.dto.UserDTO;
 import com.shorthis.entities.User;
 import com.shorthis.entities.input.UserInput;
+import com.shorthis.entities.input.UserLogin;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
@@ -32,6 +33,12 @@ public class UserMapper {
     }
 
     public User userInputToUser(UserInput input) {
+
+        return modelMapper.map(input, User.class);
+
+    }
+
+    public User userLoginToUser(UserLogin input) {
 
         return modelMapper.map(input, User.class);
 

@@ -59,4 +59,18 @@ public class UserService {
 
     }
 
+    public User login(User user) {
+
+        User local = this.findUserByLoginOrElseThrow(user.getLogin());
+
+        boolean isCorrectPassword = userSecurity.isCorrectPassword(user.getHashPassword(), local.getHashPassword());
+
+        if (isCorrectPassword) {
+            return local;
+        } else {
+            throw new UserException("The password is incorrect!");
+        }
+
+    }
+
 }

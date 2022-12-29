@@ -4,6 +4,7 @@ import com.shorthis.entities.ShortedURL;
 import com.shorthis.entities.User;
 import com.shorthis.entities.dto.UserDTO;
 import com.shorthis.entities.input.UserInput;
+import com.shorthis.entities.input.UserLogin;
 import com.shorthis.entities.mapper.UserMapper;
 import com.shorthis.service.UserService;
 import lombok.AllArgsConstructor;
@@ -56,6 +57,17 @@ public class UserController {
         return ResponseEntity.ok(userMapper.userToUserDTO(user));
 
     }
+
+    @GetMapping("/login")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<UserDTO> login(@Valid @RequestBody UserLogin input) {
+
+        User user = userService.login(userMapper.userLoginToUser(input));
+
+        return ResponseEntity.ok(userMapper.userToUserDTO(user));
+
+    }
+
 
 }
 

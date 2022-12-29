@@ -14,9 +14,9 @@ public class UserSecurity {
 
     private HashUtil hashUtil;
 
-    public boolean isCorrectPassword(String login, String pass) {
+    public boolean isCorrectPassword(String inputPassword, String correctPassword) {
 
-        return true;
+        return this.toSHA256(inputPassword).equals(correctPassword);
 
     }
 
