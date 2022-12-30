@@ -58,7 +58,7 @@ public class UserController {
 
     }
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<UserDTO> login(@Valid @RequestBody UserLogin input) {
 
