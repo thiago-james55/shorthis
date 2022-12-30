@@ -109,6 +109,11 @@ button#buttonSignUp{
     width: 70%;
 }
 
+button#buttonLogin{
+    margin-top: 1%;
+    width: 70%;
+}
+
 button:hover {
     background-color: red;
     color: white;
