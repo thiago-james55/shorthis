@@ -84,7 +84,30 @@ function createSessionFromLogin(userDto) {
     setTimeout(function () {
         sessionStorage.setItem("login", userDto.login);
         window.location.href = "/index.html";
-      }, 5000);
+      }, 3000);
     
     
 }
+
+function isLogedIn() {
+
+  let login = sessionStorage.getItem("login");
+
+  if (login) {
+    window.location.href = "/index.html";
+  }
+
+}
+
+isLogedIn();
+
+document.body.addEventListener("keypress", function(event) {
+
+  if (event.key === "Enter") {
+
+    event.preventDefault();
+
+    buttonLogin.click();
+  }
+  
+});

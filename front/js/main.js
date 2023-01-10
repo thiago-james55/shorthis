@@ -2,6 +2,7 @@ var enterLinkinput = document.getElementById("enterlink");
 var submitButton = document.getElementById("submit");
 var toastyMessageDiv = document.getElementById("toastyMessage");
 var shortUrlController = "http://localhost:8080/shorthis/users";
+var login = sessionStorage.getItem("login");
 
 function addListerners() {
 
@@ -82,17 +83,19 @@ function showToasty(message) {
 
 function isLogedIn() {
 
-  let login = sessionStorage.getItem("login");
-
   if (login) {
-    document.getElementById("aUserInformation").hidden = false;
-    document.getElementById("aUserInformation").innerHTML = login;
-    document.getElementById("aLogin").hidden = true;
-    document.getElementById("aSignUp").hidden = true;
+    loggedPanel();
     document.getElementById("info").innerHTML = "Enter the link below to short"
   }
 
 
+}
+
+function loggedPanel() {
+  document.getElementById("aUserInformation").hidden = false;
+  document.getElementById("aUserInformation").innerHTML = login;
+  document.getElementById("aLogin").hidden = true;
+  document.getElementById("aSignUp").hidden = true;
 }
 
 isLogedIn();

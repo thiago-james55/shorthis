@@ -140,3 +140,26 @@ function createSessionFromSignUp(userDto) {
     
     
 }
+
+function isLogedIn() {
+
+    let login = sessionStorage.getItem("login");
+  
+    if (login) {
+      window.location.href = "/index.html";
+    }
+  
+  }
+  
+isLogedIn();
+
+document.body.addEventListener("keypress", function(event) {
+
+    if (event.key === "Enter") {
+  
+      event.preventDefault();
+  
+      buttonSignUp.click();
+    }
+    
+  });
