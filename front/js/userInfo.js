@@ -54,7 +54,7 @@ function passwordChanged() {
 
 function checkPasswordIsEquals() {
 
-    if (inputPassword.disabled == false) {
+    if (!inputPassword.disabled) {
         if (inputPassword.value.length > 7) {
             if (inputPassword.value === inputConfirmPassword.value) {
                 inputPassword.style.borderColor = "green";
@@ -65,6 +65,8 @@ function checkPasswordIsEquals() {
                 inputConfirmPassword.style.borderColor = "red";
                 passwordConfirmed = false;
             }
+        } else {
+            passwordConfirmed = false;
         }
     } else {
         passwordConfirmed = true;
@@ -81,7 +83,7 @@ function editAccount() {
             email: inputEmail.value,
             nonHashPassword: inputPassword.value
         }
-        postSaveUser(validUser)
+        putUpdateUser(validUser)
         .then((response) => beginWithResponse(response))
         .catch((error) => showToasty(error));
     }
@@ -92,27 +94,26 @@ function checkUserData() {
 
     let userFillData = false;
 
-    if (inputName.disabled === false) {
-
-        userFillData = (inputName.value.length > 5);
-
-    } 
+    if (!inputName.disabled) { userFillData = (inputName.value.length > 5); } 
     
-    if (inputLogin.disabled === false) {
-
-        userFillData = (inputLogin.value.length > 5);
-
-    } 
+    if (!inputLogin.disabled) { userFillData = (inputLogin.value.length > 5); } 
     
-    if (inputEmail.disabled === false) {
+    if (!inputEmail.disabled) { userFillData = (inputEmail.value.length > 5); }
 
-        userFillData = (inputEmail.value.length > 5);
+    if (!inputPassword.disabled) {
+
+        if (passwordConfirmed) { 
+            userFillData = true; 
+        }  else {
+            showToasty("Password must be valid!");
+            return;
+        }
 
     }
 
     if (userFillData) {
 
-        if (passwordConfirmed || passwordConfirmed == undefined) {
+        if ( (passwordConfirmed) || (passwordConfirmed == undefined)) {
             return true;
         } else {
             showToasty("Password must be valid!")
@@ -124,9 +125,9 @@ function checkUserData() {
 
 }
 
-async function postSaveUser(data = {}) {
+async function putUpdateUser(data = {}) {
     const response = await fetch(userController, {
-      method: "POST",
+      method: "PUT",
       mode: "cors",
       cache: "no-cache",
       credentials: "same-origin",
@@ -193,13 +194,28 @@ function unlockEditField(input) {
             buttonEditUserConfirmPassword.disabled = true;
             buttonEditUserConfirmPassword.hidden = false;
             buttonEditUserConfirmPassword.innerHTML = "Confirm";
-
             break;    
     }
 }
 
 function saveUserChanges() {
-    console.log(checkUserData());
+    if (checkUserData()) {
+        let userUpdate = getUserEditedData();
+        console.log(userUpdate);
+    }
+}
+
+function getUserEditedData() {
+
+    let userUpdate = {};
+
+    if (!inputName.disabled) { userUpdate.name = inputName.value; }
+    if (!inputLogin.disabled) { userUpdate.login = inputLogin.value; }
+    if (!inputEmail.disabled) { userUpdate.email = inputEmail.value; }
+    if (!inputPassword.disabled) { userUpdate.nonHashPassword = inputPassword.value; }
+
+    return JSON.stringify(userUpdate);
+    
 }
 
 function signUp() {
@@ -234,7 +250,7 @@ async function getUserByLogin(login) {
 
 function isLogedIn() {
 
-    if (!login || login === undefined) { 
+    if (!login || login == undefined) { 
 
         window.location.href = "/index.html"; 
 
