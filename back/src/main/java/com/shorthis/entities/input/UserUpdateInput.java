@@ -13,25 +13,19 @@ import javax.validation.constraints.Size;
 @Getter
 @Setter
 
-public class UserInput {
+public class UserUpdateInput {
 
-    @NotNull
-    @NotBlank
+    private String oldLogin;
+
     @Size(min = 5 , max = 60)
     private String login;
 
-    @NotNull
-    @NotBlank
     @Size(min = 5 , max = 60)
     private String name;
 
-    @NotNull
-    @NotBlank
     @Email
     private String email;
 
-    @NotNull
-    @NotBlank
     @Size(min = 5 , max = 60)
     private String nonHashPassword;
 

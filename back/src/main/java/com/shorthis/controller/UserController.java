@@ -5,6 +5,7 @@ import com.shorthis.entities.User;
 import com.shorthis.entities.dto.UserDTO;
 import com.shorthis.entities.input.UserInput;
 import com.shorthis.entities.input.UserLogin;
+import com.shorthis.entities.input.UserUpdateInput;
 import com.shorthis.entities.mapper.UserMapper;
 import com.shorthis.service.UserService;
 import lombok.AllArgsConstructor;
@@ -55,6 +56,17 @@ public class UserController {
         User user = userService.saveUser(userMapper.userInputToUser(input));
 
         return ResponseEntity.ok(userMapper.userToUserDTO(user));
+
+    }
+
+    @PutMapping
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<User> updateUser(@Valid @RequestBody UserUpdateInput input) {
+
+        User user = userService.updateUser(userMapper.userUpdateInputToUser(input));
+
+        //return ResponseEntity.ok(userMapper.userToUserDTO(user));
+        return ResponseEntity.ok(user);
 
     }
 

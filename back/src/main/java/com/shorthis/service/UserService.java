@@ -73,4 +73,30 @@ public class UserService {
 
     }
 
+    public User updateUser(User userUpdate) {
+        User user = this.findUserByLoginOrElseThrow(userUpdate.getLogin());
+        userRepository.save(compareAndUpdateUserInformation(userUpdate, user));
+        return user;
+    }
+
+    private User compareAndUpdateUserInformation(User userUpdate, User user) {
+
+        if ( (userUpdate.getLogin() != null) && !user.getLogin().equals(userUpdate.getLogin()) ) {
+            user.setLogin(userUpdate.getLogin());
+        }
+
+        if ( (userUpdate.getName() != null) && !user.getName().equals(userUpdate.getName()) ) {
+            user.setName(userUpdate.getName());
+        }
+
+        if ( (userUpdate.getEmail() != null) && !user.getEmail().equals(userUpdate.getEmail()) ) {
+            user.setEmail(userUpdate.getEmail());
+        }
+
+        if ( (userUpdate.getHashPassword() != null) && !user.getHashPassword().equals(userSecurity.toSHA256(userUpdate.getHashPassword())) ) {
+            user.setHashPassword(userSecurity.toSHA256(userUpdate.getHashPassword()));
+        }
+
+        return user;
+    }
 }

@@ -4,6 +4,7 @@ import com.shorthis.entities.dto.UserDTO;
 import com.shorthis.entities.User;
 import com.shorthis.entities.input.UserInput;
 import com.shorthis.entities.input.UserLogin;
+import com.shorthis.entities.input.UserUpdateInput;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
@@ -44,4 +45,9 @@ public class UserMapper {
 
     }
 
+    public User userUpdateInputToUser(UserUpdateInput input) {
+
+        return modelMapper.map(input, User.class);
+
+    }
 }
