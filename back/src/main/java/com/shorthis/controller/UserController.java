@@ -61,12 +61,11 @@ public class UserController {
 
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<User> updateUser(@Valid @RequestBody UserUpdateInput input) {
+    public ResponseEntity<UserDTO> updateUser(@Valid @RequestBody UserUpdateInput input) {
 
         User user = userService.updateUser(userMapper.userUpdateInputToUser(input));
 
-        //return ResponseEntity.ok(userMapper.userToUserDTO(user));
-        return ResponseEntity.ok(user);
+        return ResponseEntity.ok(userMapper.userToUserDTO(user));
 
     }
 
