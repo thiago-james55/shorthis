@@ -6,108 +6,83 @@ var userControllerLogin = "http://localhost:8080/shorthis/users/login";
 addListerners();
 
 function addListerners() {
-    buttonLogin.addEventListener("click", () => { loginAccount(); })    
+  buttonLogin.addEventListener("click", () => {
+    loginAccount();
+  });
 }
 
 function loginAccount() {
-
-    if (checkUserData()) {
-        let loginUser = {
-            login: inputLogin.value,
-            nonHashPassword: inputPassword.value
-        }
-        postLoginUser(loginUser)
-        .then((response) => beginWithResponse(response))
-        .catch((error) => showToasty(error));
-    }
-
-}
-
-function checkUserData() {
-
-    let userFillData = (inputLogin.value.length > 5) 
-                    && (inputPassword.value.length > 5);
-
-    if (userFillData) {
-
-        return true;
-
-    } else {
-        showToasty("The fields length must be greater than 5!")
-    }
-
+  let loginUser = {
+    login: inputLogin.value,
+    nonHashPassword: inputPassword.value,
+  };
+  postLoginUser(loginUser)
+    .then((response) => beginWithResponse(response))
+    .catch((error) => showToasty(error));
 }
 
 async function postLoginUser(data = {}) {
-    const response = await fetch(userControllerLogin, {
-      method: "POST",
-      mode: "cors",
-      cache: "no-cache",
-      credentials: "same-origin",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      redirect: "follow",
-      referrerPolicy: "no-referrer",
-      body: JSON.stringify(data),
-    });
-    return response.json();
-  }
+  const response = await fetch(userControllerLogin, {
+    method: "POST",
+    mode: "cors",
+    cache: "no-cache",
+    credentials: "same-origin",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    redirect: "follow",
+    referrerPolicy: "no-referrer",
+    body: JSON.stringify(data),
+  });
+  return response.json();
+}
 
-  function beginWithResponse(response) {
-    let json;
+function beginWithResponse(response) {
+  let json;
 
-    if (response.status !== 400 && response.status !== 404) {
-      json = response;
-      createSessionFromLogin(json);      
-    } else {
-      throw new Error(response.title);
-    }
+  if (response.status !== 400 && response.status !== 404) {
+    json = response;
+    createSessionFromLogin(json);
+  } else {
+    throw new Error(response.title);
   }
+}
 
 function showToasty(message) {
-    var toastyMessage = document.getElementById("toastyMessage");
-    toastyMessage.innerHTML = message;
-  
-    toastyMessage.className = "show";
-  
-    setTimeout(function () {
-      toastyMessage.className = toastyMessage.className.replace("show", "");
-    }, 3000);
-  }
+  var toastyMessage = document.getElementById("toastyMessage");
+  toastyMessage.innerHTML = message;
+
+  toastyMessage.className = "show";
+
+  setTimeout(function () {
+    toastyMessage.className = toastyMessage.className.replace("show", "");
+  }, 3000);
+}
 
 function createSessionFromLogin(userDto) {
+  toastyMessage.style.backgroundColor = "green";
+  showToasty("User " + userDto.login + " successfully logged!");
 
-    toastyMessage.style.backgroundColor = "green";
-    showToasty("User " + userDto.login + " successfully logged!");
-
-    setTimeout(function () {
-        sessionStorage.setItem("login", userDto.login);
-        window.location.href = "/index.html";
-      }, 3000);
-    
-    
+  setTimeout(function () {
+    sessionStorage.setItem("login", userDto.login);
+    window.location.href = "/index.html";
+  }, 3000);
 }
 
 function isLogedIn() {
-
   let login = sessionStorage.getItem("login");
 
   if (login) {
     window.location.href = "/index.html";
   }
-
 }
 
 isLogedIn();
 
-document.body.addEventListener("keypress", function(event) {
-
+document.body.addEventListener("keypress", function (event) {
   if (event.key === "Enter") {
-
     event.preventDefault();
 
     buttonLogin.click();
   }
-  
 });
