@@ -1,7 +1,7 @@
 var enterLinkinput = document.getElementById("enterlink");
 var submitButton = document.getElementById("submit");
 var toastyMessageDiv = document.getElementById("toastyMessage");
-var shortUrlController = "http://localhost:8080/shorthis/users";
+var shortUrlController = "http://localhost:8080/shorthis/";
 var login = sessionStorage.getItem("login");
 
 function addListerners() {
@@ -16,9 +16,10 @@ function addListerners() {
   });
 
   submitButton.addEventListener("click", () => {
-    //Add logic to userLogin
-  
-    saveShort(enterLinkinput.value);
+
+    //Add logic JWT
+      
+    saveShort(enterLinkinput.value,login);
   });
 
 }
@@ -27,7 +28,7 @@ function addListerners() {
 async function saveShort(url, userLogin) {
   let post;
 
-  if (userLogin == null) {
+  if ( (!userLogin) || (userLogin == undefined)  ) {
     post = postSaveShort({ url: url })
       .then((response) => beginWithResponse(response))
       .catch((error) => showToasty(error));
@@ -99,3 +100,4 @@ function loggedPanel() {
 }
 
 isLogedIn();
+addListerners();

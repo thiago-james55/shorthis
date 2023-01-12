@@ -1,8 +1,10 @@
-const server = "localhost:8080/shorthis/";
+const shortUrlController = "http://localhost:8080/shorthis";
+const server = "http://localhost:8080/shorthis/"
 const shortKey = new URLSearchParams(window.location.search).get("key");
 var inputOfYourLink = document.getElementById("yourLink");
 var copyLinkButton = document.getElementById("copyButton");
 var toastyMessageDiv = document.getElementById("toastyMessage");
+var login = sessionStorage.getItem("login");
 
 function fill() {
   inputOfYourLink.value = shortKey;
@@ -32,4 +34,58 @@ function showToasty(message) {
   }, 3000);
 }
 
-fill();
+function isLogedIn() {
+
+  if ((login) && (login != undefined)) {
+    loggedPanel();
+    document.getElementById("info").innerHTML = "You successfully generated your Short!";
+  }
+
+}
+
+function loggedPanel() {
+  document.getElementById("aUserInformation").hidden = false;
+  document.getElementById("aUserInformation").innerHTML = login;
+  document.getElementById("aLogin").hidden = true;
+  document.getElementById("aSignUp").hidden = true;
+}
+
+
+function checkShortKeyExistsAndFillIfExists() {
+
+  getShortByShortKey(shortKey)
+    .then((response) => beginWithResponse(response))
+    .catch((error) => showToasty(error));
+
+}
+
+async function getShortByShortKey(shortKey) {
+  const response = await fetch(shortUrlController + "/" + shortKey + "/show", {
+    method: "GET",
+    mode: "cors",
+    cache: "no-cache",
+    credentials: "same-origin",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    redirect: "follow",
+    referrerPolicy: "no-referrer",
+  });
+  return response.json();
+}
+
+function beginWithResponse(response, update) {
+  let json;
+
+  if (response.status != 404) {
+    json = response;
+    fill();    
+  } else {
+    throw new Error(response.title);
+  }
+}
+
+
+isLogedIn();
+checkShortKeyExistsAndFillIfExists();
+
