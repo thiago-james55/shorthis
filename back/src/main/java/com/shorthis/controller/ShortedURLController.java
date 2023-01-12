@@ -41,11 +41,11 @@ public class ShortedURLController {
     }
 
     @GetMapping("/{shortKey}/show")
-    public ResponseEntity<String> showUrlOfShortKey(@PathVariable String shortKey) {
+    public ResponseEntity<ShortedURL> getShortedUrl(@PathVariable String shortKey) {
 
         ShortedURL shortedURL = shortedURLService.findShortedUrlByShortKeyOrThrow(shortKey);
 
-        return ResponseEntity.ok(shortedURL.getUrl());
+        return ResponseEntity.ok(shortedURL);
 
     }
 
