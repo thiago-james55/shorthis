@@ -1,6 +1,7 @@
 package com.shorthis.controller;
 
 import com.shorthis.entities.ShortedURL;
+import com.shorthis.entities.ShortedURLSearch;
 import com.shorthis.entities.input.ShortedURLInput;
 import com.shorthis.service.ShortedURLService;
 import lombok.AllArgsConstructor;
@@ -46,6 +47,15 @@ public class ShortedURLController {
         ShortedURL shortedURL = shortedURLService.findShortedUrlByShortKeyOrThrow(shortKey);
 
         return ResponseEntity.ok(shortedURL);
+
+    }
+
+    @GetMapping("/{shortKeyOrUrl}/search")
+    public ResponseEntity<List<ShortedURLSearch>> searchShortKeyOrUrl(@PathVariable String shortKeyOrUrl) {
+
+        List<ShortedURL> shortedURLS = shortedURLService.findByShortKeyOrUrl(shortKeyOrUrl);
+
+        return ResponseEntity.ok(shortedURLService.shortedURLSToSearch(shortedURLS));
 
     }
 

@@ -1,15 +1,17 @@
 package com.shorthis.service;
 
 import com.shorthis.entities.ShortedURL;
+import com.shorthis.entities.ShortedURLSearch;
 import com.shorthis.entities.User;
 import com.shorthis.entities.input.ShortedURLInput;
 import com.shorthis.repository.ShortedURLRepository;
-import com.shorthis.service.exception.ShortedUrlException;
 import com.shorthis.service.exception.ShortedUrlNotFoundException;
 import com.shorthis.utils.ShortUtil;
 import lombok.AllArgsConstructor;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -54,10 +56,46 @@ public class ShortedURLService {
 
     }
 
+    public List<ShortedURL> findByShortKeyOrUrl(String shortKeyOrUrl) {
+
+        List<ShortedURL> results = new ArrayList<>();
+
+        try {
+            results.add(findShortedUrlByShortKeyOrThrow(shortKeyOrUrl));
+            return results;
+        } catch (ShortedUrlNotFoundException ignored) {
+
+        }
+
+        results = shortedURLRepository.findByUrlLike(shortKeyOrUrl);
+
+        if (results.size() > 0) { return results; }
+        else { throw new ShortedUrlNotFoundException("Shorkey and URL not found!"); }
+    }
+
     public ShortedURL findShortedUrlByShortKeyOrThrow(String shortKey) {
 
         return shortedURLRepository.findById(shortKey)
                 .orElseThrow( () -> new ShortedUrlNotFoundException("ShortKey " + shortKey + "not found"));
 
+    }
+
+    public List<ShortedURLSearch> shortedURLSToSearch(List<ShortedURL> shortedURLS) {
+
+        ArrayList<ShortedURLSearch> shortedUrlsSearch = new ArrayList<>();
+
+        shortedURLS.forEach(shortedURL -> {
+
+            ShortedURLSearch shortedURLSearch = new ShortedURLSearch(
+                    shortedURL.getShortKey(),
+                    shortedURL.getUrl(),
+                    shortedURL.getUser().getLogin()
+            );
+
+            shortedUrlsSearch.add(shortedURLSearch);
+
+        });
+
+        return  shortedUrlsSearch;
     }
 }
