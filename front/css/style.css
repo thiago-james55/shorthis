@@ -190,3 +190,39 @@ button:hover {
     to {bottom: 0; opacity: 0;}
   }
 
+  #overFlowTable {
+    width: 90%;
+    overflow-x: auto;
+    margin: auto;
+  }
+
+  #linksTable {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1% auto auto auto;
+  }
+  
+  #linksTable td, #linksTable th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+
+    
+  #linksTable tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #linksTable tr:hover {background-color: #ddd;}
+  
+  #linksTable th {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+    background-color: red;
+    color: white;
+  }
+
+
+  #thShortKey{ width: 15%;}
+  
+  #thURL{ width: 70%;  }
+

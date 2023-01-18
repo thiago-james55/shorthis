@@ -99,5 +99,13 @@ function loggedPanel() {
   document.getElementById("aSignUp").hidden = true;
 }
 
+document.body.addEventListener("keypress", function (event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+
+    submitButton.click();
+  }
+});
+
 isLogedIn();
 addListerners();

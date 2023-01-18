@@ -7,9 +7,11 @@ var toastyMessageDiv = document.getElementById("toastyMessage");
 var login = sessionStorage.getItem("login");
 
 function fill() {
-  inputOfYourLink.value = shortKey;
 
   inputOfYourLink.value = server + shortKey;
+
+  toastyMessage.style.backgroundColor = "green";
+  showToasty("You successfully generated your Short!")
 
   copyLinkButton.addEventListener("click", () => {
     var copyText = document.getElementById("yourLink");
@@ -21,6 +23,8 @@ function fill() {
 
     showToasty("Link copied to clipboard: " + copyText.value);
   });
+
+  
 }
 
 function showToasty(message) {
@@ -53,9 +57,15 @@ function loggedPanel() {
 
 function checkShortKeyExistsAndFillIfExists() {
 
+  if ( (shortKey) && shortKey != null) {
+
   getShortByShortKey(shortKey)
     .then((response) => beginWithResponse(response))
     .catch((error) => showToasty(error));
+
+  } else {
+    showToasty("ShortKey must be valid!")
+  }
 
 }
 
