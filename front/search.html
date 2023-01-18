@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/search.js" defer></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <title>ShortHIS - Search</title>
+</head>
+
+<body>
+  <div class="topnav">
+    <a id="title" href="/index.html">ShortHIS</a>
+    <a href="/search.html">Search</a>
+    <a href="/myshorts.html">My Shorts</a>
+    <a href="/about.html">About</a>
+
+    <div class="login">
+      <a id="aUserInformation" hidden href="/userInformation.html">User</a>
+      <a id="aLogin" href="/login.html">Login</a>
+      <a id="aSignUp" href="/signup.html">Sign Up</a>
+    </div>
+
+  </div>
+
+  <div class="welcome">
+    <h1>Search</h1>
+    <p id="info">Search existing links or show one link by ShortKey.
+  </div>
+
+  <div class="engine">
+    <input id="linkSearch" type="text" name="inputshort" placeholder="Enter the link here or ShortKey">
+    
+    <button id="searchLinks" type="button">Search</button>
+
+    <div id="overFlowTable">
+    <table hidden id="linksTable">
+      <tr>
+        <th id="thShortKey">ShortKey</th>
+        <th id="thURL">URL</th>
+        <th id="thUser">User</th>
+      </tr>
+    </table>
+  </div>
+
+  </div>
+
+  <div id="toastyMessage">
+    error
+  </div>
+
+
+</body>
+
+</html>
