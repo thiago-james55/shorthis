@@ -2,6 +2,7 @@ package com.shorthis.controller;
 
 import com.shorthis.entities.ShortedURL;
 import com.shorthis.entities.ShortedURLSearch;
+import com.shorthis.entities.User;
 import com.shorthis.entities.input.ShortedURLInput;
 import com.shorthis.service.ShortedURLService;
 import lombok.AllArgsConstructor;
@@ -18,7 +19,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/shorthis")
+@RequestMapping("/shorthis/shortedurls")
 public class ShortedURLController {
 
     ShortedURLService shortedURLService;
@@ -27,17 +28,6 @@ public class ShortedURLController {
     public ResponseEntity<List<ShortedURL>> findAllShorts() {
 
         return ResponseEntity.ok(shortedURLService.findAll());
-
-    }
-
-    @RequestMapping("/{shortKey}")
-    public RedirectView localRedirect(@PathVariable String shortKey) {
-
-        ShortedURL shortedURL = shortedURLService.findShortedUrlByShortKeyOrThrow(shortKey);
-
-        RedirectView redirectView = new RedirectView();
-        redirectView.setUrl(shortedURL.getUrl());
-        return redirectView;
 
     }
 
@@ -59,6 +49,15 @@ public class ShortedURLController {
 
     }
 
+    @GetMapping("/user/{userLogin}")
+    public ResponseEntity<List<ShortedURL>> findShortedUrlsByUser(@PathVariable String userLogin) {
+
+        User user = new User();
+        user.setLogin(userLogin);
+
+        return ResponseEntity.ok(shortedURLService.findShortedUrlsByUser(user));
+
+    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -70,6 +69,15 @@ public class ShortedURLController {
 
     }
 
+    @PatchMapping
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<ShortedURL> patchShortedUrl(@RequestBody ShortedURL shortedURL) {
+
+        ShortedURL patchShortedURL = shortedURLService.patchShortedURL(shortedURL);
+
+        return ResponseEntity.ok(patchShortedURL);
+
+    }
 
 
 }

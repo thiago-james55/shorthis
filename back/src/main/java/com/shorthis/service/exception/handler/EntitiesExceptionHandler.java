@@ -1,9 +1,6 @@
 package com.shorthis.service.exception.handler;
 
-import com.shorthis.service.exception.ShortedUrlNotFoundException;
-import com.shorthis.service.exception.UrlException;
-import com.shorthis.service.exception.UserException;
-import com.shorthis.service.exception.UserNotFoundException;
+import com.shorthis.service.exception.*;
 import lombok.AllArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -69,6 +66,14 @@ public class EntitiesExceptionHandler extends ResponseEntityExceptionHandler {
         Problem problem = new Problem(HttpStatus.NOT_FOUND.value(), OffsetDateTime.now(),ex.getMessage(),null);
 
         return  handleExceptionInternal(ex,problem,new HttpHeaders(),HttpStatus.NOT_FOUND,request);
+    }
+
+    @ExceptionHandler(ShortedUrlException.class)
+    public ResponseEntity<Object> handleShortedUrlException(ShortedUrlException ex, WebRequest request) {
+
+        Problem problem = new Problem(HttpStatus.BAD_REQUEST.value(), OffsetDateTime.now(),ex.getMessage(),null);
+
+        return  handleExceptionInternal(ex,problem,new HttpHeaders(),HttpStatus.BAD_REQUEST,request);
     }
 
     @ExceptionHandler(ShortedUrlNotFoundException.class)

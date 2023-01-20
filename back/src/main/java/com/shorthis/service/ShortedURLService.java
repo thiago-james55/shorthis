@@ -5,6 +5,7 @@ import com.shorthis.entities.ShortedURLSearch;
 import com.shorthis.entities.User;
 import com.shorthis.entities.input.ShortedURLInput;
 import com.shorthis.repository.ShortedURLRepository;
+import com.shorthis.service.exception.ShortedUrlException;
 import com.shorthis.service.exception.ShortedUrlNotFoundException;
 import com.shorthis.utils.ShortUtil;
 import lombok.AllArgsConstructor;
@@ -50,10 +51,30 @@ public class ShortedURLService {
 
     }
 
+    public ShortedURL patchShortedURL(ShortedURL patchedShortedURL) {
+
+        ShortedURL oldShortedURL = findShortedUrlByShortKeyOrThrow(patchedShortedURL.getShortKey());
+
+        boolean sameUser = oldShortedURL.getUser().getLogin().equals(patchedShortedURL.getUser().getLogin());
+
+        if (sameUser) {
+            oldShortedURL.setUrl(shortUtil.validateUrl(patchedShortedURL.getUrl()));
+            return shortedURLRepository.save(oldShortedURL);
+        } else {
+            throw new ShortedUrlException("This shortkey is not from this user!");
+        }
+
+    }
+
     public List<ShortedURL> findAll() {
 
         return shortedURLRepository.findAll();
 
+    }
+
+    public List<ShortedURL> findShortedUrlsByUser(User user) {
+
+        return shortedURLRepository.findByUser(user);
     }
 
     public List<ShortedURL> findByShortKeyOrUrl(String shortKeyOrUrl) {
