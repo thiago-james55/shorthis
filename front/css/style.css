@@ -226,3 +226,8 @@ button:hover {
   
   #thURL{ width: 70%;  }
 
+  #buttonEdit, #buttonDelete {
+    width: fit-content;
+    height: fit-content;
+  }
+

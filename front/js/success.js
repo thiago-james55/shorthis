@@ -1,4 +1,4 @@
-const shortUrlController = "http://localhost:8080/shorthis";
+const shortUrlController = "http://localhost:8080/shorthis/shortedurls/";
 const server = "http://localhost:8080/shorthis/"
 const shortKey = new URLSearchParams(window.location.search).get("key");
 var inputOfYourLink = document.getElementById("yourLink");

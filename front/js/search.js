@@ -2,7 +2,7 @@ var inputlinkSearch = document.getElementById("linkSearch");
 var buttonSearchLinks = document.getElementById("searchLinks");
 var tableLinks = document.getElementById("linksTable");
 var toastyMessageDiv = document.getElementById("toastyMessage");
-var shortUrlController = "http://localhost:8080/shorthis/";
+var shortUrlController = "http://localhost:8080/shorthis/shortedurls/";
 var login = sessionStorage.getItem("login");
 
 function addListerners() {

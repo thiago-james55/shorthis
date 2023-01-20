@@ -1,17 +1,16 @@
 var enterLinkinput = document.getElementById("enterlink");
 var submitButton = document.getElementById("submit");
 var toastyMessageDiv = document.getElementById("toastyMessage");
-var shortUrlController = "http://localhost:8080/shorthis/";
+var shortUrlController = "http://localhost:8080/shorthis/shortedurls/";
 var login = sessionStorage.getItem("login");
 
 function addListerners() {
 
-  enterLinkinput.addEventListener("change", function () {
+  enterLinkinput.addEventListener("keyup", function () {
     if (enterLinkinput.value.length > 5) {
       submitButton.disabled = false;
     } else {
       submitButton.disabled = true;
-      showToasty("Input length must be greater than 5!");
     }
   });
 
