@@ -39,7 +39,7 @@ async function getSearchLinks(shortKeyOrUrl) {
 function beginWithResponse(response) {
   let json;
 
-  if (response.status !== 400) {
+  if (response.status != 404) {
     fillTable(response);
   } else {
     throw new Error(response.title);

@@ -2,6 +2,10 @@ var tableLinks = document.getElementById("linksTable");
 var toastyMessageDiv = document.getElementById("toastyMessage");
 var shortUrlController = "http://localhost:8080/shorthis/shortedurls/";
 var login = sessionStorage.getItem("login");
+var pModalKey = document.getElementById("pModalKey");
+var aModalUrl = document.getElementById("aModalUrl");
+var divDeleteModal = document.getElementById("divDeleteModal");
+var buttonModalDelete = document.getElementById("buttonModalDelete");
 
 function addListerners() {
 
@@ -38,6 +42,7 @@ function loggedPanel() {
 }
 
 function fillTable(jsonData) {
+
   clearTableData();
 
   jsonData.forEach((shortedURL) => {
@@ -83,6 +88,10 @@ function addInfoToTable(shortedURL) {
   let buttonDelete = document.createElement("button");
   buttonDelete.textContent = "🗑";
   buttonDelete.id = "buttonDelete";
+  buttonDelete.rowIndex = row.rowIndex;
+  buttonDelete.addEventListener("click", function (e) {
+    displayDeleteShortModal(e);
+  });
 
   cellShortKey.appendChild(pShortKey);
   cellURL.appendChild(aURL);
@@ -122,6 +131,40 @@ function transformRowToEdit(e) {
     saveEditedShort(patchedShortedURL);
         
   }
+
+}
+
+function displayDeleteShortModal(e) {
+
+  divDeleteModal.style.display = "block";
+
+  let row = tableLinks.rows[e.target.rowIndex];
+  let shortKey = row.cells[0].children[0].innerHTML;
+
+  pModalKey.textContent = "Key: " + shortKey;
+
+  let url = row.cells[1].children[0].href;
+  aModalUrl.href = url;
+  if (url.toString().length > 70) {
+    aModalUrl.textContent = url.substring(0, 70) + "...?";
+  } else {
+    aModalUrl.textContent = url;
+  }
+  aModalUrl.title = url;
+
+  let deleteShortedURL = {
+    shortKey: shortKey,
+    url: url.toString(),
+    user: { login: login }
+  };
+
+  buttonModalDelete.addEventListener("click", function (e) {
+
+    deleteShort(deleteShortedURL)
+    .then((response) => beginWithResponseDelete(response,deleteShortedURL))
+    .catch((error) => showToasty(error));
+
+  });
 
 }
 
@@ -174,12 +217,40 @@ async function patchUpdateShort(short) {
   return response.json();
 }
 
+async function deleteShort(short) {
+  const response = await fetch(shortUrlController, {
+    method: "DELETE",
+    mode: "cors",
+    cache: "no-cache",
+    credentials: "same-origin",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    redirect: "follow",
+    referrerPolicy: "no-referrer",
+    body: JSON.stringify(short),
+  });
+  return response;
+}
+
 
 function beginWithResponse(response,patchedShortedURL) {
 
   if (response.status !== 400) {
     getUserShorts();
     showToasty("ShortKey:" + patchedShortedURL.shortKey + " successfully edited!");
+  } else {
+    throw new Error(response.title);
+  }
+}
+
+function beginWithResponseDelete(response,deletedShortedUrl) {
+
+  console.log(response)
+  if (response.status == 200) {
+    divDeleteModal.style.display = "none";
+    showToasty("ShortKey:" + deletedShortedUrl.shortKey + " successfully deleted!");
+    getUserShorts();
   } else {
     throw new Error(response.title);
   }

@@ -46,6 +46,24 @@
 
   </div>
 
+  <div id="divDeleteModal" class="modal">
+    <div id="modalContent">
+    <span onclick="document.getElementById('divDeleteModal').style.display='none'" class="close" title="Close Modal">×</span>
+      <div class="container">
+        <h1 id="h1Modal">Delete Short</h1>
+        <p id="pModalKey">Key:</p>
+        <span>URL:</span>
+        <a id="aModalUrl">URL:</a>
+        <p id="pModal">Are you sure you want to delete your short?</p>
+      
+        <div class="clearfix">
+          <button onclick="document.getElementById('divDeleteModal').style.display='none'" id="buttonModalCancel" type="button">Cancel</button>
+          <button id="buttonModalDelete" type="button">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div id="toastyMessage">
     error
   </div>
