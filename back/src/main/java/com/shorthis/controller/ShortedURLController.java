@@ -79,6 +79,16 @@ public class ShortedURLController {
 
     }
 
+    @DeleteMapping
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<Void> deleteShortedUrl(@RequestBody ShortedURL deleteShortedUrl) {
+
+        shortedURLService.deleteShortedURL(deleteShortedUrl);
+
+        return ResponseEntity.ok().build();
+
+    }
+
 
 }
 

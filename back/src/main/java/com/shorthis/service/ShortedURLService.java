@@ -9,7 +9,6 @@ import com.shorthis.service.exception.ShortedUrlException;
 import com.shorthis.service.exception.ShortedUrlNotFoundException;
 import com.shorthis.utils.ShortUtil;
 import lombok.AllArgsConstructor;
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -62,6 +61,23 @@ public class ShortedURLService {
             return shortedURLRepository.save(oldShortedURL);
         } else {
             throw new ShortedUrlException("This shortkey is not from this user!");
+        }
+
+    }
+
+    public void deleteShortedURL(ShortedURL deleteShortedURL) {
+
+        ShortedURL oldShortedURL = findShortedUrlByShortKeyOrThrow(deleteShortedURL.getShortKey());
+
+        boolean sameUser = oldShortedURL.getUser().getLogin().equals(deleteShortedURL.getUser().getLogin());
+        boolean sameUrl = oldShortedURL.getUrl().equals(deleteShortedURL.getUrl()) ||
+                oldShortedURL.getUrl().equals(deleteShortedURL.getUrl().substring(0,deleteShortedURL.getUrl().length()-1));
+
+        if (sameUser && sameUrl) {
+            shortedURLRepository.delete(deleteShortedURL);
+        } else {
+            if (!sameUser) { throw new ShortedUrlException("This shortkey is not from this user!"); }
+            if (!sameUrl) { throw new ShortedUrlException("This url is not from this shortkey!"); }
         }
 
     }
