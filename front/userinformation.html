@@ -1,62 +1,67 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <script src="js/userInfo.js" defer></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <title>ShortHIS - User Info</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <script type="module" src="js/userInfo.js" defer></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <title>ShortHIS - User Info</title>
 </head>
+
 <body>
-    <div class="topnav">
-        <a id="title" href="/index.html">ShortHIS</a>
-        <a href="/search.html">Search</a>
-        <a href="/myshorts.html">My Shorts</a>
-        <a href="/about.html">About</a>
+  <div class="topnav">
+    <a id="title" href="/index.html">ShortHIS</a>
+    <a href="/search.html">Search</a>
+    <a hidden id="aMyShorts" href="/myshorts.html">My Shorts</a>
+    <a href="/about.html">About</a>
 
-        <div class="login">
-          <a id="aUserInformation" hidden href="/userInformation.html">User</a>
-          <a id="aLogin" href="/login.html">Login</a>
-          <a id="aSignUp" href="/signup.html">Sign Up</a>
-      </div>
+    <div class="login">
+      <a id="aUserInformation" hidden href="/userInformation.html">User</a>
+      <a id="aLogin" href="/login.html">Login</a>
+      <a id="aSignUp" href="/signup.html">Sign Up</a>
+    </div>
 
-      </div>
+  </div>
 
-      <div class="welcome">
-        <h1>Personal Info</h1>
-        </div>
+  <div class="welcome">
+    <h1>Personal Info</h1>
+  </div>
 
-      <div class="engine">
-        
-        <input disabled id="inputLogin" class="userData" placeholder="Login" type="text" name="inputLogin" id="inputLogin">
-        <button disabled class="buttonEditUser" id="buttonEditUserLogin">Login</button>
+  <div class="engine">
 
-        <input disabled id="inputName" class="userData" placeholder="Name" type="text" name="inputName" id="inputName">
-        <button class="buttonEditUser" id="buttonEditUserName">🖊</button>
+    <input disabled id="inputLogin" class="userData" placeholder="Login" type="text" name="inputLogin" id="inputLogin">
+    <button disabled class="buttonEditUser" id="buttonEditUserLogin">Login</button>
 
-        <input disabled id="inputEmail" class="userData" placeholder="Email" type="email" name="inputEmail" id="inputEmail">
-        <button class="buttonEditUser" id="buttonEditUserEmail">🖊</button>
+    <input disabled id="inputName" class="userData" placeholder="Name" type="text" name="inputName" id="inputName">
+    <button class="buttonEditUser" id="buttonEditUserName">🖊</button>
 
-        <input disabled id="inputPassword" class="userData" placeholder="Password" type="password" name="inputPassword" id="inputPassword">
-        <button class="buttonEditUser" id="buttonEditUserPassword">🖊</button>
+    <input disabled id="inputEmail" class="userData" placeholder="Email" type="email" name="inputEmail" id="inputEmail">
+    <button class="buttonEditUser" id="buttonEditUserEmail">🖊</button>
 
-        <input id="inputConfirmPassword" class="userData" placeholder="Confirm Password" type="hidden" name="inputConfirmPassword" id="inputConfirmPassword">
-        <button hidden class="buttonEditUser" id="buttonEditUserConfirmPassword">🖊</button>
-        <p hidden id="pPasswordWeakness">Password Weakness: Type a Password</p>
-        
-        <button hidden id="buttonSaveChanges">Save</button>
-        <button id="buttonSignOut">Sign Out</button>
+    <input disabled id="inputPassword" class="userData" placeholder="Password" type="password" name="inputPassword"
+      id="inputPassword">
+    <button class="buttonEditUser" id="buttonEditUserPassword">🖊</button>
 
-      </div>
-      
-   
+    <input id="inputConfirmPassword" class="userData" placeholder="Confirm Password" type="hidden"
+      name="inputConfirmPassword" id="inputConfirmPassword">
+    <button hidden class="buttonEditUser" id="buttonEditUserConfirmPassword">🖊</button>
+    <p hidden id="pPasswordWeakness">Password Weakness: Type a Password</p>
 
-      <div id="toastyMessage">
-        error
-      </div>
+    <button hidden id="buttonSaveChanges">Save</button>
+    <button id="buttonSignOut">Sign Out</button>
+
+  </div>
+
+
+
+  <div id="toastyMessage">
+    error
+  </div>
 
 
 </body>
+
 </html>

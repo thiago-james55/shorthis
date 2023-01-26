@@ -1,81 +1,35 @@
+import {
+  beginWithResponse,
+  getSearchLinks,
+  isLogedIn,
+  loggedPanel,
+  showToasty,
+} from "./utils.js";
+
 var inputlinkSearch = document.getElementById("linkSearch");
 var buttonSearchLinks = document.getElementById("searchLinks");
 var tableLinks = document.getElementById("linksTable");
-var toastyMessageDiv = document.getElementById("toastyMessage");
-var shortUrlController = "http://localhost:8080/shorthis/shortedurls/";
-var login = sessionStorage.getItem("login");
 
-function addListerners() {
-  buttonSearchLinks.addEventListener("click", () => searchLinks());
-}
+buttonSearchLinks.addEventListener("click", () => searchLinks());
 
 async function searchLinks() {
   let inputShortKeyOrUrl = inputlinkSearch.value;
 
   if (inputShortKeyOrUrl.length > 0) {
     getSearchLinks(inputShortKeyOrUrl)
-      .then((response) => beginWithResponse(response))
+      .then((response) => beginWithResponse(response, fillTable))
       .catch((error) => showToasty(error));
   } else {
     showToasty("The length of search must be greater than 0");
   }
 }
 
-async function getSearchLinks(shortKeyOrUrl) {
-  const response = await fetch(shortUrlController + shortKeyOrUrl + "/search", {
-    method: "GET",
-    mode: "cors",
-    cache: "no-cache",
-    credentials: "same-origin",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    redirect: "follow",
-    referrerPolicy: "no-referrer",
-  });
-  return response.json();
-}
-
-function beginWithResponse(response) {
-  let json;
-
-  if (response.status != 404) {
-    fillTable(response);
-  } else {
-    throw new Error(response.title);
-  }
-}
-
-function showToasty(message) {
-  var toastyMessage = document.getElementById("toastyMessage");
-  toastyMessage.innerHTML = message;
-
-  toastyMessage.className = "show";
-
-  setTimeout(function () {
-    toastyMessage.className = toastyMessage.className.replace("show", "");
-  }, 3000);
-}
-
-function isLogedIn() {
-  if (login && login != undefined) {
-    loggedPanel();
-  }
-}
-
-function loggedPanel() {
-  document.getElementById("aUserInformation").hidden = false;
-  document.getElementById("aUserInformation").innerHTML = login;
-  document.getElementById("aLogin").hidden = true;
-  document.getElementById("aSignUp").hidden = true;
-}
-
 function fillTable(jsonData) {
   tableLinks.hidden = false;
-  
+
   clearTableData();
-  
-  showToasty(jsonData.length + " results found!")
+
+  showToasty(jsonData.length + " results found!");
 
   jsonData.forEach((shortedURL) => {
     addInfoToTable(shortedURL);
@@ -85,7 +39,7 @@ function fillTable(jsonData) {
 function clearTableData() {
   var rowCount = tableLinks.rows.length;
   for (var i = 1; i < rowCount; i++) {
-      tableLinks.deleteRow(1);
+    tableLinks.deleteRow(1);
   }
 }
 
@@ -118,11 +72,14 @@ function addInfoToTable(shortedURL) {
 document.body.addEventListener("keypress", function (event) {
   if (event.key === "Enter") {
     event.preventDefault();
-
     buttonSearchLinks.click();
   }
 });
 
+function constructLoggedPanel() {
+  if (isLogedIn()) {
+    loggedPanel();
+  }
+}
 
-isLogedIn();
-addListerners();
+constructLoggedPanel();

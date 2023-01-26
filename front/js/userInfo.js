@@ -1,3 +1,13 @@
+import {
+  beginWithResponse,
+  getUserByLogin,
+  isLogedIn,
+  loggedPanel,
+  login,
+  putUpdateUser,
+  showToasty,
+} from "./utils.js";
+
 var inputName = document.getElementById("inputName");
 var inputEmail = document.getElementById("inputEmail");
 var inputPassword = document.getElementById("inputPassword");
@@ -5,8 +15,6 @@ var inputConfirmPassword = document.getElementById("inputConfirmPassword");
 var pPasswordWeakness = document.getElementById("pPasswordWeakness");
 var buttonSignUp = document.getElementById("buttonSignUp");
 var passwordConfirmed;
-var userController = "http://localhost:8080/shorthis/users";
-var login = sessionStorage.getItem("login");
 
 var buttonEditUserName = document.getElementById("buttonEditUserName");
 var buttonEditUserEmail = document.getElementById("buttonEditUserEmail");
@@ -17,13 +25,11 @@ var buttonEditUserConfirmPassword = document.getElementById(
 var buttonSaveChanges = document.getElementById("buttonSaveChanges");
 var buttonSignUp = document.getElementById("buttonSignOut");
 
-addListerners();
-
 function addListerners() {
-  inputPassword.addEventListener("change", () => {
+  inputPassword.addEventListener("keyup", () => {
     passwordChanged();
   });
-  inputConfirmPassword.addEventListener("change", () => {
+  inputConfirmPassword.addEventListener("keyup", () => {
     checkPasswordIsEquals();
   });
   buttonEditUserName.addEventListener("click", () => unlockEditField("name"));
@@ -92,10 +98,6 @@ function checkUserData() {
     userFillData = inputName.value.length > 5;
   }
 
-  if (!inputLogin.disabled) {
-    userFillData = inputLogin.value.length > 5;
-  }
-
   if (!inputEmail.disabled) {
     userFillData = inputEmail.value.length > 5;
   }
@@ -118,17 +120,6 @@ function checkUserData() {
   } else {
     showToasty("The fields length must be greater than 5!");
   }
-}
-
-function showToasty(message) {
-  var toastyMessage = document.getElementById("toastyMessage");
-  toastyMessage.innerHTML = message;
-
-  toastyMessage.className = "show";
-
-  setTimeout(function () {
-    toastyMessage.className = toastyMessage.className.replace("show", "");
-  }, 3000);
 }
 
 function unlockEditField(input) {
@@ -184,39 +175,15 @@ function saveUserChanges() {
 
 function editAccount(validUser) {
   putUpdateUser(validUser)
-    .then((response) => beginWithResponse(response, true))
+    .then((response) =>
+      beginWithResponse(response, function () {
+        showToasty("User succesfully updated!");
+        setTimeout(function () {
+          location.reload();
+        }, 3000);
+      })
+    )
     .catch((error) => showToasty(error));
-}
-
-async function putUpdateUser(data = {}) {
-  const response = await fetch(userController, {
-    method: "PUT",
-    mode: "cors",
-    cache: "no-cache",
-    credentials: "same-origin",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    redirect: "follow",
-    referrerPolicy: "no-referrer",
-    body: JSON.stringify(data),
-  });
-  return response.json();
-}
-
-function beginWithResponse(response, update) {
-  let json;
-
-  if (response.status !== 400) {
-    json = response;
-    loadUserInfo(json);
-    if (update) {
-      showToasty("User succesfully updated!");
-      setTimeout(function () { location.reload(); }, 3000);
-    }
-  } else {
-    throw new Error(response.title);
-  }
 }
 
 function signUp() {
@@ -224,7 +191,7 @@ function signUp() {
   showToasty("Successfully Signed Out!");
   setTimeout(function () {
     window.location.href = "/index.html";
-  }, 3000);
+  }, 2000);
 }
 
 function loadUserInfo(UserJson) {
@@ -234,40 +201,19 @@ function loadUserInfo(UserJson) {
   inputPassword.value = "**********";
 }
 
-async function getUserByLogin(login) {
-  const response = await fetch(userController + "/" + login, {
-    method: "GET",
-    mode: "cors",
-    cache: "no-cache",
-    credentials: "same-origin",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    redirect: "follow",
-    referrerPolicy: "no-referrer",
-  });
-  return response.json();
-}
-
-function isLogedIn() {
-  if (!login || login == undefined) {
-    window.location.href = "/index.html";
-  } else {
+function ifLoggedRequestAndFillData() {
+  if (isLogedIn()) {
     loggedPanel();
 
     getUserByLogin(login)
       .then((response) => {
-        userInfo = beginWithResponse(response);
+        beginWithResponse(response, loadUserInfo);
       })
       .catch((error) => showToasty(error));
+  } else {
+    window.location.href = "/index.html";
   }
 }
 
-function loggedPanel() {
-  document.getElementById("aUserInformation").hidden = false;
-  document.getElementById("aUserInformation").innerHTML = login;
-  document.getElementById("aLogin").hidden = true;
-  document.getElementById("aSignUp").hidden = true;
-}
-
-isLogedIn();
+ifLoggedRequestAndFillData();
+addListerners();

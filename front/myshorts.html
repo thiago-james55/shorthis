@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css">
-  <script src="js/myshorts.js" defer></script>
+  <script type="module" src="js/myshorts.js" defer></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <title>ShortHIS - My Shorts</title>
 </head>
@@ -15,7 +15,7 @@
   <div class="topnav">
     <a id="title" href="/index.html">ShortHIS</a>
     <a href="/search.html">Search</a>
-    <a href="/myshorts.html">My Shorts</a>
+    <a hidden id="aMyShorts" href="/myshorts.html">My Shorts</a>
     <a href="/about.html">About</a>
 
     <div class="login">
@@ -34,30 +34,32 @@
   <div class="engine">
 
     <div id="overFlowTable">
-    <table id="linksTable">
-      <tr>
-        <th id="thShortKey">ShortKey</th>
-        <th id="thURL">URL</th>
-        <th id="thEdit">Edit</th>
-        <th id="thDelete">Delete</th>
-      </tr>
-    </table>
-  </div>
+      <table id="linksTable">
+        <tr>
+          <th id="thShortKey">ShortKey</th>
+          <th id="thURL">URL</th>
+          <th id="thEdit">Edit</th>
+          <th id="thDelete">Delete</th>
+        </tr>
+      </table>
+    </div>
 
   </div>
 
   <div id="divDeleteModal" class="modal">
     <div id="modalContent">
-    <span onclick="document.getElementById('divDeleteModal').style.display='none'" class="close" title="Close Modal">×</span>
+      <span onclick="document.getElementById('divDeleteModal').style.display='none'" class="close"
+        title="Close Modal">×</span>
       <div class="container">
         <h1 id="h1Modal">Delete Short</h1>
         <p id="pModalKey">Key:</p>
         <span>URL:</span>
         <a id="aModalUrl">URL:</a>
         <p id="pModal">Are you sure you want to delete your short?</p>
-      
+
         <div class="clearfix">
-          <button onclick="document.getElementById('divDeleteModal').style.display='none'" id="buttonModalCancel" type="button">Cancel</button>
+          <button onclick="document.getElementById('divDeleteModal').style.display='none'" id="buttonModalCancel"
+            type="button">Cancel</button>
           <button id="buttonModalDelete" type="button">Delete</button>
         </div>
       </div>

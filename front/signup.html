@@ -1,52 +1,57 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <script src="js/signup.js" defer></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <title>ShortHIS - Sign Up</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <script type="module" src="js/signup.js" defer></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <title>ShortHIS - Sign Up</title>
 </head>
+
 <body>
-    <div class="topnav">
-        <a id="title" href="/index.html">ShortHIS</a>
-        <a href="/search.html">Search</a>
-        <a href="/myshorts.html">My Shorts</a>
-        <a href="/about.html">About</a>
+  <div class="topnav">
+    <a id="title" href="/index.html">ShortHIS</a>
+    <a href="/search.html">Search</a>
+    <a hidden id="aMyShorts" href="/myshorts.html">My Shorts</a>
+    <a href="/about.html">About</a>
 
-        <div class="login">
-            <a id="aUserInformation" hidden href="/userInformation.html">User</a>
-            <a id="aLogin" href="/login.html">Login</a>
-            <a id="aSignUp" href="/signup.html">Sign Up</a>
-        </div>
+    <div class="login">
+      <a id="aUserInformation" hidden href="/userInformation.html">User</a>
+      <a id="aLogin" href="/login.html">Login</a>
+      <a id="aSignUp" href="/signup.html">Sign Up</a>
+    </div>
 
-      </div>
+  </div>
 
-      <div class="welcome">
-      <h1>Sign Up</h1>
-      <p>Sign up to have access to you <a href="/myshorts.html">personal shorts</a>.</p>
-      <p>Create, save , edit yours shorts and <a href="/myshorts.html">view shorts</a> of other users. </p>
-      </div>
-      
-      <div class="engine">
+  <div class="welcome">
+    <h1>Sign Up</h1>
+    <p>Sign up to have access to you <a href="/myshorts.html">personal shorts</a>.</p>
+    <p>Create, save , edit yours shorts and <a href="/myshorts.html">view shorts</a> of other users. </p>
+  </div>
 
-      
-        <input id="inputName" class="userData" placeholder="Name" type="text" name="inputName" id="inputName">
-        <input id="inputLogin" class="userData" placeholder="Login" type="text" name="inputLogin" id="inputLogin">
-        <input id="inputEmail" class="userData" placeholder="Email" type="email" name="inputEmail" id="inputEmail">
-        <input id="inputPassword" class="userData" placeholder="Password" type="password" name="inputPassword" id="inputPassword">
-        <input id="inputConfirmPassword" class="userData" placeholder="Confirm Password" type="password" name="inputConfirmPassword" id="inputConfirmPassword">
-        <p id="pPasswordWeakness">Password Weakness: Type a Password</p>
-        <button id="buttonSignUp">Create Account</button>
+  <div class="engine">
 
-      </div>
 
-      <div id="toastyMessage">
-        error
-      </div>
+    <input id="inputName" class="userData" placeholder="Name" type="text" name="inputName" id="inputName">
+    <input id="inputLogin" class="userData" placeholder="Login" type="text" name="inputLogin" id="inputLogin">
+    <input id="inputEmail" class="userData" placeholder="Email" type="email" name="inputEmail" id="inputEmail">
+    <input id="inputPassword" class="userData" placeholder="Password" type="password" name="inputPassword"
+      id="inputPassword">
+    <input id="inputConfirmPassword" class="userData" placeholder="Confirm Password" type="password"
+      name="inputConfirmPassword" id="inputConfirmPassword">
+    <p id="pPasswordWeakness">Password Weakness: Type a Password</p>
+    <button id="buttonSignUp">Create Account</button>
+
+  </div>
+
+  <div id="toastyMessage">
+    error
+  </div>
 
 
 </body>
+
 </html>
