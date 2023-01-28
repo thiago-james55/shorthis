@@ -107,7 +107,7 @@ public class ShortedURLService {
         results = shortedURLRepository.findByUrlLike(shortKeyOrUrl);
 
         if (results.size() > 0) { return results; }
-        else { throw new ShortedUrlNotFoundException("Shorkey and URL not found!"); }
+        else { throw new ShortedUrlNotFoundException("Shortkey and URL not found!"); }
     }
 
     public ShortedURL findShortedUrlByShortKeyOrThrow(String shortKey) {
