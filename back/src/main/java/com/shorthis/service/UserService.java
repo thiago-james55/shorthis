@@ -99,4 +99,9 @@ public class UserService {
 
         return user;
     }
+
+    public User anonymousUser() {
+         return userRepository.findById("Anonymous")
+                 .orElse(userRepository.save(new User("Anonymous","Universal User","adminofsystem@root.com","d0ntH@ckTh3Anonym0us",null)));
+    }
 }

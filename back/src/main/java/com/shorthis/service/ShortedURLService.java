@@ -40,8 +40,7 @@ public class ShortedURLService {
         if (shortedURLInput.getUser() != null) {
            user = userService.findUserByLoginOrElseThrow(shortedURLInput.getUser().getLogin());
         } else {
-            user = new User();
-            user.setLogin("Anonymous");
+            user = userService.anonymousUser();
         }
 
         ShortedURL shortedURL = new ShortedURL(shortKey,validUrl,user);
